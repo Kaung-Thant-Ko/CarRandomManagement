@@ -1,22 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using CarRandomManagement.Configurations.Entities;
+using CarRandomManagement.Data;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using CarRandomManagement.Domain;
-using CarRandomManagement.Configurations.Entities;
-using Model = CarRandomManagement.Configurations.Entities.ModelSeed;
-using Make = CarRandomManagement.Configurations.Entities.MakeSeed;
 
 namespace CarRandomManagement.Data
 {
-    public class CarRandomManagementContext : DbContext
+    public class CarRandomManagementContext(DbContextOptions<CarRandomManagementContext> options) : IdentityDbContext<CarRandomManagementUser>(options)
     {
-        public CarRandomManagementContext (DbContextOptions<CarRandomManagementContext> options)
-            : base(options)
-        {
-        }
-
         public DbSet<CarRandomManagement.Domain.Make> Make { get; set; } = default!;
         public DbSet<CarRandomManagement.Domain.Colour> Colour { get; set; } = default!;
         public DbSet<CarRandomManagement.Domain.Model> Model { get; set; } = default!;
@@ -35,3 +25,4 @@ namespace CarRandomManagement.Data
         }
     }
 }
+
